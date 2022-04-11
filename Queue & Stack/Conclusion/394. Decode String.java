@@ -15,6 +15,69 @@ class Solution {
     Output: "abcabccdcdcdef"
     */
 
+    // ---------------- recursion ------------------
+    // int index = 0; 
+    // public String decodeString(String s) {
+    //     StringBuilder res = new StringBuilder();
+    //     while(index < s.length() && s.charAt(index) != ']') {
+    //         if(! Character.isDigit(s.charAt(index))) {
+    //             res.append(s.charAt(index));
+    //             index++;
+    //         } else {
+    //             int count = 0;
+    //             while(index < s.length() && Character.isDigit(s.charAt(index))) {
+    //                 count = count * 10 + s.charAt(index) - '0';
+    //                 index++;
+    //             }
+    //             index++; //numbers are done and next should be '['
+                
+    //             // build substring 
+    //             String decoded = decodeString(s);
+                
+    //             index++;
+    //             while(count-- > 0)
+    //                 res.append(decoded);
+    //         }
+    //     }
+    //     return new String(res);
+    // }
+
+
+    // ------------ two stack ---------------
+    public String decodeString(String s){
+        Stack<Integer> intStack = new Stack<>(); // record multiplier
+        Stack<StringBuilder> strStack = new Stack<>(); // record string
+        StringBuilder currStr = new StringBuilder();
+        StringBuilder currInt = new StringBuilder();
+        for(Character i : s.toCharArray()){
+            if(Character.isDigit(i)){
+                currInt.append(i);
+            }
+            else if(Character.isAlphabetic(i)){
+                currStr.append(i);
+            }
+            else if(i == '['){ // means prev string and next string is not sychronized, preserve prev string
+                if(currStr.length() > 0){
+                    strStack.push(currStr);
+                }
+                intStack.push(Integer.parseInt(currInt.toString()));
+                currStr = new StringBuilder();
+                currInt = new StringBuilder();
+            }
+            else if(i == ']'){
+                int count = intStack.pop();
+                StringBuilder prevStr = strStack.pop(); // get previous string
+                while(count-- > 0){
+                    prevStr.append(currStr);
+                }
+                currStr = prevStr; 
+            }
+        }
+        return currStr.toString();
+    }
+
+
+    // ------------- one Stack (high TC) ---------------
     public String decodeString_2(String s) {
         Stack<Character> S = new Stack<>();  
         for(int i = 0; i < s.length(); ++i){
