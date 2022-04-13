@@ -5,7 +5,9 @@ import java.util.List;
 
 class Solution {
 
-    public boolean canFinish(int numCourses, int[][] prerequisites){
+
+    // ====================== BackTracking DFS ===========================
+    public boolean canFinish_2(int numCourses, int[][] prerequisites){
         boolean[] visited = new boolean[numCourses];
         boolean[] path = new boolean[numCourses];
         HashMap<Integer, List<Integer>> M = new HashMap<>();
