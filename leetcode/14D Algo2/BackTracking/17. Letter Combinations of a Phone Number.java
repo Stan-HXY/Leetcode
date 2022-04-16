@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Solution {
+class Solution { 
 
     List<String> res = new ArrayList<>();
     char[][] P = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}, 

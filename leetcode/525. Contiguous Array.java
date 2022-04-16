@@ -12,7 +12,7 @@ class Solution {
         for(int i = 0; i < n;   ++i){
             sum += (nums[i] == 1)? 1 : -1;
             if(M.containsKey(sum)){
-                res = Math.max(res, i - M.get(sum))
+                res = Math.max(res, i - M.get(sum));
             }
             else{
                 M.put(sum, i);
