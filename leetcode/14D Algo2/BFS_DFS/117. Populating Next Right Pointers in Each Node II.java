@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 // Definition for a Node.
 class Node {
@@ -23,10 +21,49 @@ class Node {
     }
 };
 
+/*
+Populate each next pointer to point to its next right node. 
+If there is no next right node, the next pointer should be set to NULL.
+*/
 
 class Solution {
 
-    public Node connect(Node root) {
+
+    public Node connect(Node root){
+        if(root == null) return root;
+        Queue<Node> Q = new LinkedList<>();
+        Q.add(root);
+        while(!Q.isEmpty()){
+            int len = Q.size();
+            for (int i = 0; i < len; i++) {
+                Node t = Q.poll();
+                if(i < len - 1){
+                    t.next = Q.peek();
+                }
+                if(t.left != null){
+                    Q.add(t.left);
+                }
+                if(t.right != null){
+                    Q.add(t.right);
+                }
+            }
+        }
+        return root;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public Node connect_1(Node root) {
         if(root == null) return root;
         Queue<Node> Q = new LinkedList<>();
         Q.add(root);

@@ -1,9 +1,54 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
-import javax.print.attribute.IntegerSyntax;
+
+
 
 class Solution {
+
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int n = grid.length;
+        if(n == 1) return 1;
+        if(grid[0][0] == 1) return -1;
+        int res = 1;
+        Queue<int[]> Q = new LinkedList<>();
+        int[][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}, {1, 1}, {1, -1}, {-1, -1}, {-1, 1}};
+        Q.add(new int[]{0, 0});
+        while(!Q.isEmpty()){
+            int len = Q.size();
+            ++res;
+            for(int i = 0; i < len; ++i){
+                int[] temp = Q.poll();
+                grid[temp[0]][temp[1]] = 1;
+                for(int[] d : directions){
+                    int r = temp[0] + d[0];
+                    int c = temp[1] + d[1];
+                    if(r == n - 1 && c == n - 1) return res;
+                    if(r >= 0 && r < n && c >= 0 && c < n && grid[r][c] == 0){
+                        Q.add(new int[]{r, c});
+                        grid[r][c] = 1;
+                    }
+                }
+            }     
+        }
+        return -1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // bfs
 
@@ -11,7 +56,7 @@ class Solution {
                             {1, -1}, {-1, 0}, {-1, 1}, {-1, -1}};
 
 
-    public int shortestPathBinaryMatrix(int[][] grid){
+    public int shortestPathBinaryMatrix_1(int[][] grid){
         int len = grid.length;
         if(grid[0][0] == 1 || grid[len - 1][len - 1] == 1) return -1;
         Queue<int[]> Q = new LinkedList<>();

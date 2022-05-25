@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "C++_3b0b5fd2"
+        },
+        {
             "name": "clang++ - 生成和调试活动文件",
             "type": "cppdbg",
             "request": "launch",
